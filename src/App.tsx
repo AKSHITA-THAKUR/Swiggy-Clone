@@ -2,6 +2,8 @@ import './App.css'
 import Navbar from './component/Navbar';
 import ScrollBar from './component/Scrollbar';
 import Restraunts from './component/Restraunts';
+import Restraunt2 from './component/Restraunt2';
+
 function App() {
 
   return (
@@ -9,6 +11,7 @@ function App() {
       <Navbar/>
      <ScrollBar/>
      <Restraunts/>
+     <Restraunt2/>
      
     </>
   )
