@@ -19,14 +19,13 @@ const ScrollBar: React.FC = () => {
 	const homepageData: any = useSelector(
 		(state: RootState) => state.homepage.data
 	);
-	console.log("This is the homepageData", homepageData);
+	// console.log("This is the homepageData", homepageData);
 
 	useEffect(() => {
 		dispatch(dishesData());
 	}, [dispatch]);
 
 	const renderImageGridCards = () => {
-		// Extract the cards array from the response data
 		const cards = homepageData?.data?.cards || [];
 
 		// Find the card with the GridWidget type that contains the imageGridCards info
@@ -38,6 +37,7 @@ const ScrollBar: React.FC = () => {
 
 		// Extract the info array from imageGridCards if available
 		const imageGridCards = gridCard?.card?.card?.imageGridCards?.info || [];
+		console.log("The image grid cards are", imageGridCards);
 
 		return imageGridCards.map((item: any) => (
 			<div
@@ -75,10 +75,6 @@ const ScrollBar: React.FC = () => {
 			<div className=" flex border  overflow-hidden shadow-md">
 				{renderImageGridCards()}
 			</div>
-
-			
-
-
 		</div>
 	);
 };

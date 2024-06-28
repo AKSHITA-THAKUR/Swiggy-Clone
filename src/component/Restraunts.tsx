@@ -1,13 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-
+import {restrauntData} from "../redux/HomePageSlice"
 
 const Restaurants: React.FC = () => {
-
-    const [slide, setSlide] = useState(0);
+	const [slide, setSlide] = useState(0);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const nextSlide = () => {
 		setSlide(slide + 3);
@@ -21,18 +23,21 @@ const Restaurants: React.FC = () => {
 		(state: RootState) => state.homepage.data
 	);
 
-
+	const ClickDiv = (id:number) => {
+		dispatch(restrauntData(id))
+		navigate("/detail");
+	};
 
 	const renderRestaurants = () => {
 		const cards = restaurantsData?.data?.cards || [];
-		console.log("the card is ", cards);
+		// console.log("the card is ", cards);
 
 		const gridCard = cards.find(
 			(card: any) =>
 				card.card?.card?.gridElements?.infoWithStyle?.["@type"] ===
 				"type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle"
 		);
-		console.log("The grid card is", gridCard);
+		// console.log("The grid card is", gridCard);
 		if (!gridCard) {
 			return null;
 		}
@@ -45,27 +50,36 @@ const Restaurants: React.FC = () => {
 		}
 
 		return restaurantCards.map((restaurant: any) => (
-			<div key={restaurant.info.id} className="w-[273px] mx-4 border shrink-0 grow" style={{
-                transform: `translate(-${slide * 100}%)`,
-            }} >
-                <div className="w-[250px]  ">
-				<img
-					src={`https://media-assets.swiggy.com/swiggy/image/upload/${restaurant.info.cloudinaryImageId}`}
-					alt={restaurant.info.name}
-					className="w-full h-40 object-cover mb-4 rounded-md"
-				/>
-                </div>
+			<div
 				
-                <div className="ml-3">
-                <h2 className="text-lg font-semibold mb-2">
-					{restaurant.info.name}
-				</h2>
-				<p className="text-gray-500">{restaurant.info.locality}</p>
-				<p className="text-gray-500">{restaurant.info.costForTwo}</p>
-				<p className="text-gray-500">
-					{restaurant.info.cuisines.join(", ")}
-				</p>
-                </div>
+				key={restaurant.info.id}
+				className="w-[273px] mx-4 border shrink-0 grow shadow-lg"
+				style={{
+					transform: `translate(-${slide * 100}%)`,
+					transition: "transform 0.4s ease-in-out",
+				}}
+				onClick={()=>ClickDiv(restaurant.info.id) }
+			>
+				<div className="w-full  ">
+					<img
+						src={`https://media-assets.swiggy.com/swiggy/image/upload/${restaurant.info.cloudinaryImageId}`}
+						alt={restaurant.info.name}
+						className="w-full h-40 object-cover mb-4 rounded-md"
+					/>
+				</div>
+
+				<div className="ml-3">
+					<h2 className="text-lg font-semibold mb-2">
+						{restaurant.info.name}
+					</h2>
+					<p className="text-gray-500">{restaurant.info.locality}</p>
+					<p className="text-gray-500">
+						{restaurant.info.costForTwo}
+					</p>
+					<p className="text-gray-500">
+						{restaurant.info.cuisines.join(", ")}
+					</p>
+				</div>
 			</div>
 		));
 	};
@@ -85,7 +99,8 @@ const Restaurants: React.FC = () => {
 				</div>
 			</div>
 			<div className="flex border p-2  overflow-hidden">
-                {renderRestaurants()}</div>
+				{renderRestaurants()}
+			</div>
 		</div>
 	);
 };

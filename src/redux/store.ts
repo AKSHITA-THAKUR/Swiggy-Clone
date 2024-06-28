@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { dishReducer } from "./HomePageSlice";
+import { dishReducer  , menuReducer} from "./HomePageSlice";
 
 
 const store = configureStore({
     reducer:{
-       homepage : dishReducer 
+       homepage : dishReducer  ,
+       menu: menuReducer
     }
 })
 

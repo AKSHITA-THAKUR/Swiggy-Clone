@@ -1,18 +1,17 @@
 import './App.css'
-import Navbar from './component/Navbar';
-import ScrollBar from './component/Scrollbar';
-import Restraunts from './component/Restraunts';
-import Restraunt2 from './component/Restraunt2';
-
+import { BrowserRouter , Routes , Route } from 'react-router-dom'
+import Homepage from './component/Homepage'
+import RestrauntDetail from './component/RestrauntDetail'
 function App() {
 
   return (
     <>
-      <Navbar/>
-     <ScrollBar/>
-     <Restraunts/>
-     <Restraunt2/>
-     
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Homepage/>}/>
+      <Route path='/detail' element={<RestrauntDetail/>}/>
+     </Routes>
+     </BrowserRouter>
     </>
   )
 }
