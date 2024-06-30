@@ -1,7 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
+import {restrauntData} from "../redux/HomePageSlice"
 
 const Restraunt2 = () => {
 	const onlineRestraunt: any = useSelector(
@@ -9,8 +10,11 @@ const Restraunt2 = () => {
 	);
 
 	const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-	const ClickDiv = () => {
+
+	const ClickDiv = (id:number) => {
+		dispatch(restrauntData(id))
 		navigate("/detail");
 	};
 
@@ -36,7 +40,7 @@ const Restraunt2 = () => {
 			<div
 				key={restaurant.info.id}
 				className="w-[273px] mx-4 border my-5  shadow-md"
-				onClick={ClickDiv}
+				onClick={()=> ClickDiv(restaurant.info.id)}
 			>
 				<div className="w-full  ">
 					<img
