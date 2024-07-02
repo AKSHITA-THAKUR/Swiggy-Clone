@@ -37,7 +37,7 @@ const ScrollBar: React.FC = () => {
 
 		// Extract the info array from imageGridCards if available
 		const imageGridCards = gridCard?.card?.card?.imageGridCards?.info || [];
-		console.log("The image grid cards are", imageGridCards);
+		// console.log("The image grid cards are", imageGridCards);
 
 		return imageGridCards.map((item: any) => (
 			<div

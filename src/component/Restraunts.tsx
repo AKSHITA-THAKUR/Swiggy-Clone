@@ -23,10 +23,10 @@ const Restaurants: React.FC = () => {
 		(state: RootState) => state.homepage.data
 	);
 
-	const ClickDiv = (id:number) => {
-		dispatch(restrauntData(id))
-		navigate("/detail");
-	};
+	const ClickDiv = async (id: number) => {
+		await dispatch(restrauntData(id)); 
+		navigate(`/detail/${id}`);
+	  };
 
 	const renderRestaurants = () => {
 		const cards = restaurantsData?.data?.cards || [];

@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Homepage/>}/>
-      <Route path='/detail' element={<RestrauntDetail/>}/>
+      <Route path="/detail/:id" element={<RestrauntDetail />} />
      </Routes>
      </BrowserRouter>
     </>

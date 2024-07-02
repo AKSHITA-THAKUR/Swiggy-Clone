@@ -13,10 +13,10 @@ const Restraunt2 = () => {
     const dispatch = useDispatch();
 
 
-	const ClickDiv = (id:number) => {
-		dispatch(restrauntData(id))
-		navigate("/detail");
-	};
+	const ClickDiv = async (id: number) => {
+		await dispatch(restrauntData(id)); // Data fetching dispatched
+		navigate(`/detail/${id}`); // Navigation after dispatch
+	  };
 
 	const renderRestaurants = () => {
 		const card2 = onlineRestraunt?.data?.cards || [];
